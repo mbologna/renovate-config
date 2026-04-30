@@ -7,6 +7,7 @@
     "dependencies"
   ],
   "rebaseWhen": "behind-base-branch",
+  "platformAutomerge": true,
   "vulnerabilityAlerts": {
     "labels": [
       "dependencies",
