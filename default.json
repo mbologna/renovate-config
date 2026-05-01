@@ -87,6 +87,13 @@
       "automergeStrategy": "squash"
     },
     {
+      "description": "GitHub Actions: never auto-merge — workflow changes run with repo permissions and are a supply-chain risk",
+      "matchManagers": [
+        "github-actions"
+      ],
+      "automerge": false
+    },
+    {
       "description": "Security/CVE updates: bypass age gate, jump the queue with prPriority 10, automerge immediately on green CI",
       "matchCategories": [
         "security"
