@@ -28,7 +28,7 @@
   },
   "packageRules": [
     {
-      "description": "Major updates: hold 30 days to let the ecosystem surface breaking changes and incompatibilities, then assign for manual review — no auto-merge",
+      "description": "Major updates: hold 30 days to let the ecosystem surface breaking changes and incompatibilities, then assign for manual review \u2014 no auto-merge",
       "matchUpdateTypes": [
         "major"
       ],
@@ -87,7 +87,7 @@
       "automergeStrategy": "squash"
     },
     {
-      "description": "GitHub Actions: never auto-merge — workflow changes run with repo permissions and are a supply-chain risk",
+      "description": "GitHub Actions: never auto-merge \u2014 workflow changes run with repo permissions and are a supply-chain risk",
       "matchManagers": [
         "github-actions"
       ],
@@ -102,6 +102,14 @@
       "prPriority": 10,
       "automerge": true,
       "automergeType": "pr"
+    },
+    {
+      "description": "Regex-managed versions: one PR per package with name and version in title, overriding the minor updates group",
+      "matchManagers": [
+        "regex"
+      ],
+      "groupName": null,
+      "commitMessageTopic": "{{depName}}"
     }
   ]
 }
