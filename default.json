@@ -28,7 +28,7 @@
   },
   "packageRules": [
     {
-      "description": "Major updates: hold 30 days to let the ecosystem surface breaking changes and incompatibilities, then assign for manual review \u2014 no auto-merge",
+      "description": "Major updates: hold 30 days to let the ecosystem surface breaking changes and incompatibilities, then assign for manual review — no auto-merge",
       "matchUpdateTypes": [
         "major"
       ],
@@ -87,21 +87,24 @@
       "automergeStrategy": "squash"
     },
     {
-      "description": "GitHub Actions: never auto-merge \u2014 workflow changes run with repo permissions and are a supply-chain risk",
+      "description": "GitHub Actions: never auto-merge — workflow changes run with repo permissions and are a supply-chain risk",
       "matchManagers": [
         "github-actions"
       ],
       "automerge": false
     },
     {
-      "description": "Security/CVE updates: bypass age gate, jump the queue with prPriority 10, automerge immediately on green CI",
+      "description": "Security/CVE updates: bypass age gate and maintenance windows, jump the queue with prPriority 10, automerge immediately on green CI",
       "matchCategories": [
         "security"
       ],
       "minimumReleaseAge": "0 days",
       "prPriority": 10,
       "automerge": true,
-      "automergeType": "pr"
+      "automergeType": "pr",
+      "schedule": [
+        "at any time"
+      ]
     },
     {
       "description": "Regex-managed versions: one PR per package with name and version in title, overriding the minor updates group",
