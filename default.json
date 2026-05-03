@@ -1,5 +1,6 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "prCreation": "not-pending",
   "pinDigests": true,
   "dependencyDashboard": true,
   "osvVulnerabilityAlerts": true,
