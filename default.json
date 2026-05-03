@@ -95,6 +95,19 @@
       "automerge": false
     },
     {
+      "description": "mbologna/.github reusable workflows: already age-gated by that repo's own Renovate run — skip stability window and automerge on green CI",
+      "matchManagers": [
+        "github-actions"
+      ],
+      "matchPackageNames": [
+        "mbologna/.github"
+      ],
+      "minimumReleaseAge": "0 days",
+      "automerge": true,
+      "automergeType": "pr",
+      "automergeStrategy": "squash"
+    },
+    {
       "description": "Security/CVE updates: bypass age gate and maintenance windows, jump the queue with prPriority 10, automerge immediately on green CI",
       "matchCategories": [
         "security"
