@@ -84,7 +84,7 @@
     {
       "description": "mbologna/.github reusable workflows: already age-gated by that repo's own Renovate run — skip stability window and automerge on green CI",
       "matchManagers": ["github-actions"],
-      "matchPackageNames": ["mbologna/.github"],
+      "matchDepNames": ["mbologna/.github"],
       "minimumReleaseAge": "0 days",
       "automerge": true,
       "automergeType": "pr",
@@ -126,6 +126,21 @@
       "matchUpdateTypes": ["major", "minor", "patch", "pin", "digest"],
       "commitMessageTopic": "terraform/{{depName}}",
       "commitMessageExtra": "from {{currentVersion}} to {{newVersion}}"
+    },
+    {
+      "description": "dockerfile: docker/ prefix, strip org/registry path keeping only image name, include from/to versions",
+      "matchManagers": ["dockerfile"],
+      "matchUpdateTypes": ["major", "minor", "patch", "pin", "digest"],
+      "commitMessageTopic": "docker/{{replace '.+/' '' depName}}",
+      "commitMessageExtra": "from {{currentValue}} to {{newValue}}"
+    },
+    {
+      "description": "composer: normalize action to lowercase, include from/to versions",
+      "matchManagers": ["composer"],
+      "matchUpdateTypes": ["major", "minor", "patch"],
+      "commitMessageTopic": "{{depName}}",
+      "commitMessageAction": "update",
+      "commitMessageExtra": "from {{currentValue}} to {{newValue}}"
     },
     {
       "description": "github-actions: action/ prefix, strip org keeping only action name, include from/to versions",
