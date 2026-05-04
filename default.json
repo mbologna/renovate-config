@@ -23,6 +23,8 @@
     "automerge": true,
     "automergeType": "pr",
     "automergeStrategy": "squash",
+    "commitMessageTopic": "lock file maintenance",
+    "commitMessageExtra": "",
     "schedule": [
       "before 9am on monday"
     ]
@@ -114,12 +116,45 @@
       ]
     },
     {
-      "description": "Regex-managed versions: one PR per package with name and version in title, overriding the minor updates group",
+      "description": "Regex-managed versions: one PR per package; commitMessageExtra overrides config:recommended docker preset to include from/to versions",
       "matchManagers": [
         "regex"
       ],
       "groupName": null,
-      "commitMessageTopic": "{{depName}}"
+      "commitMessageTopic": "{{depName}}",
+      "commitMessageExtra": "from {{currentValue}} to {{newValue}}"
+    },
+    {
+      "description": "kubernetes images: prefix PR titles with docker/, strip docker.io/ registry, include from/to versions",
+      "matchManagers": [
+        "kubernetes"
+      ],
+      "commitMessageTopic": "docker/{{replace 'docker.io/' '' depName}}",
+      "commitMessageExtra": "from {{currentValue}} to {{newValue}}"
+    },
+    {
+      "description": "argocd: prefix PR titles with helm/, include from/to versions",
+      "matchManagers": [
+        "argocd"
+      ],
+      "commitMessageTopic": "helm/{{depName}}",
+      "commitMessageExtra": "from {{currentValue}} to {{newValue}}"
+    },
+    {
+      "description": "terraform: prefix PR titles with terraform/; use resolved versions not constraint strings",
+      "matchManagers": [
+        "terraform"
+      ],
+      "commitMessageTopic": "terraform/{{depName}}",
+      "commitMessageExtra": "from {{currentVersion}} to {{newVersion}}"
+    },
+    {
+      "description": "github-actions: prefix PR titles with action/, include from/to versions",
+      "matchManagers": [
+        "github-actions"
+      ],
+      "commitMessageTopic": "action/{{depName}}",
+      "commitMessageExtra": "from {{currentValue}} to {{newValue}}"
     }
   ]
 }
