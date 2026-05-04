@@ -25,6 +25,7 @@
     "automergeType": "pr",
     "automergeStrategy": "squash",
     "commitMessagePrefix": "chore:",
+    "commitMessageAction": "lock file maintenance",
     "schedule": [
       "before 9am on monday"
     ]
@@ -142,11 +143,11 @@
       "commitMessageExtra": "from {{currentValue}} to {{newValue}}"
     },
     {
-      "description": "npm: drop redundant 'dependency' word from topic, use package name directly",
+      "description": "npm: drop redundant 'dependency' word from topic; use resolved versions (currentVersion/newVersion) not constraint strings",
       "matchManagers": ["npm"],
       "matchUpdateTypes": ["major", "minor", "patch", "pin", "digest"],
       "commitMessageTopic": "{{depName}}",
-      "commitMessageExtra": "from {{currentValue}} to {{newValue}}"
+      "commitMessageExtra": "from {{currentVersion}} to {{newVersion}}"
     },
     {
       "description": "composer: normalize action to lowercase, include from/to versions",
