@@ -25,6 +25,7 @@
     "automergeType": "pr",
     "automergeStrategy": "squash",
     "commitMessagePrefix": "chore:",
+    "commitMessageTopic": "lock file maintenance",
     "schedule": [
       "before 9am on monday"
     ]
