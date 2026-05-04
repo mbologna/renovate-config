@@ -126,33 +126,29 @@
     },
     {
       "description": "kubernetes images: prefix PR titles with docker/, strip docker.io/ registry, include from/to versions",
-      "matchManagers": [
-        "kubernetes"
-      ],
+      "matchManagers": ["kubernetes"],
+      "matchUpdateTypes": ["major", "minor", "patch", "pin", "digest"],
       "commitMessageTopic": "docker/{{replace 'docker.io/' '' depName}}",
       "commitMessageExtra": "from {{currentValue}} to {{newValue}}"
     },
     {
       "description": "argocd: prefix PR titles with helm/, include from/to versions",
-      "matchManagers": [
-        "argocd"
-      ],
+      "matchManagers": ["argocd"],
+      "matchUpdateTypes": ["major", "minor", "patch", "pin", "digest"],
       "commitMessageTopic": "helm/{{depName}}",
       "commitMessageExtra": "from {{currentValue}} to {{newValue}}"
     },
     {
-      "description": "terraform: prefix PR titles with terraform/; use resolved versions not constraint strings",
-      "matchManagers": [
-        "terraform"
-      ],
+      "description": "terraform: prefix PR titles with terraform/; use resolved versions not constraint strings; exclude lockFileMaintenance to prevent topic/extra bleed",
+      "matchManagers": ["terraform"],
+      "matchUpdateTypes": ["major", "minor", "patch", "pin", "digest"],
       "commitMessageTopic": "terraform/{{depName}}",
       "commitMessageExtra": "from {{currentVersion}} to {{newVersion}}"
     },
     {
       "description": "github-actions: prefix PR titles with action/, include from/to versions",
-      "matchManagers": [
-        "github-actions"
-      ],
+      "matchManagers": ["github-actions"],
+      "matchUpdateTypes": ["major", "minor", "patch", "pin", "digest"],
       "commitMessageTopic": "action/{{depName}}",
       "commitMessageExtra": "from {{currentValue}} to {{newValue}}"
     }
