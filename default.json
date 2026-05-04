@@ -23,6 +23,7 @@
     "automerge": true,
     "automergeType": "pr",
     "automergeStrategy": "squash",
+    "commitMessagePrefix": "chore:",
     "schedule": [
       "before 9am on monday"
     ]
@@ -30,71 +31,60 @@
   "packageRules": [
     {
       "description": "Major updates: hold 30 days to let the ecosystem surface breaking changes and incompatibilities, then assign for manual review — no auto-merge",
-      "matchUpdateTypes": [
-        "major"
-      ],
+      "matchUpdateTypes": ["major"],
       "minimumReleaseAge": "30 days",
       "automerge": false,
+      "commitMessagePrefix": "major:",
       "reviewers": [
         "mbologna"
       ]
     },
     {
       "description": "Patch updates: hold 7 days to let the community catch supply-chain attacks before auto-merging on green CI",
-      "matchUpdateTypes": [
-        "patch"
-      ],
+      "matchUpdateTypes": ["patch"],
       "minimumReleaseAge": "7 days",
       "automerge": true,
       "automergeType": "pr",
-      "automergeStrategy": "squash"
+      "automergeStrategy": "squash",
+      "commitMessagePrefix": "patch:"
     },
     {
       "description": "Digest updates: hold 7 days (same as patch) before auto-merging on green CI",
-      "matchUpdateTypes": [
-        "digest"
-      ],
+      "matchUpdateTypes": ["digest"],
       "minimumReleaseAge": "7 days",
       "automerge": true,
       "automergeType": "pr",
-      "automergeStrategy": "squash"
+      "automergeStrategy": "squash",
+      "commitMessagePrefix": "digest:"
     },
     {
       "description": "Pin updates: hold 7 days (same as patch) before auto-merging on green CI",
-      "matchUpdateTypes": [
-        "pin"
-      ],
+      "matchUpdateTypes": ["pin"],
       "minimumReleaseAge": "7 days",
       "automerge": true,
       "automergeType": "pr",
-      "automergeStrategy": "squash"
+      "automergeStrategy": "squash",
+      "commitMessagePrefix": "pin:"
     },
     {
       "description": "Minor updates: hold 14 days to let the community catch supply-chain attacks before auto-merging on green CI",
-      "matchUpdateTypes": [
-        "minor"
-      ],
+      "matchUpdateTypes": ["minor"],
       "minimumReleaseAge": "14 days",
       "automerge": true,
       "automergeType": "pr",
-      "automergeStrategy": "squash"
+      "automergeStrategy": "squash",
+      "commitMessagePrefix": "minor:"
     },
     {
       "description": "GitHub Actions: never auto-merge — workflow changes run with repo permissions and are a supply-chain risk",
-      "matchManagers": [
-        "github-actions"
-      ],
+      "matchManagers": ["github-actions"],
       "automerge": false,
       "groupName": null
     },
     {
       "description": "mbologna/.github reusable workflows: already age-gated by that repo's own Renovate run — skip stability window and automerge on green CI",
-      "matchManagers": [
-        "github-actions"
-      ],
-      "matchPackageNames": [
-        "mbologna/.github"
-      ],
+      "matchManagers": ["github-actions"],
+      "matchPackageNames": ["mbologna/.github"],
       "minimumReleaseAge": "0 days",
       "automerge": true,
       "automergeType": "pr",
@@ -102,52 +92,46 @@
     },
     {
       "description": "Security/CVE updates: bypass age gate and maintenance windows, jump the queue with prPriority 10, automerge immediately on green CI",
-      "matchCategories": [
-        "security"
-      ],
+      "matchCategories": ["security"],
       "minimumReleaseAge": "0 days",
       "prPriority": 10,
       "automerge": true,
       "automergeType": "pr",
-      "schedule": [
-        "at any time"
-      ]
+      "schedule": ["at any time"]
     },
     {
       "description": "Regex-managed versions: one PR per package; commitMessageExtra overrides config:recommended docker preset to include from/to versions",
-      "matchManagers": [
-        "regex"
-      ],
+      "matchManagers": ["regex"],
       "groupName": null,
       "commitMessageTopic": "{{depName}}",
       "commitMessageExtra": "from {{currentValue}} to {{newValue}}"
     },
     {
-      "description": "kubernetes images: prefix PR titles with docker/, strip docker.io/ registry, include from/to versions",
+      "description": "kubernetes images: docker/ prefix, strip org/registry path keeping only image name, include from/to versions",
       "matchManagers": ["kubernetes"],
       "matchUpdateTypes": ["major", "minor", "patch", "pin", "digest"],
-      "commitMessageTopic": "docker/{{replace 'docker.io/' '' depName}}",
+      "commitMessageTopic": "docker/{{replace '.+/' '' depName}}",
       "commitMessageExtra": "from {{currentValue}} to {{newValue}}"
     },
     {
-      "description": "argocd: prefix PR titles with helm/, include from/to versions",
+      "description": "argocd: helm/ prefix, strip org/registry path keeping only chart name, include from/to versions",
       "matchManagers": ["argocd"],
       "matchUpdateTypes": ["major", "minor", "patch", "pin", "digest"],
-      "commitMessageTopic": "helm/{{depName}}",
+      "commitMessageTopic": "helm/{{replace '.+/' '' depName}}",
       "commitMessageExtra": "from {{currentValue}} to {{newValue}}"
     },
     {
-      "description": "terraform: prefix PR titles with terraform/; use resolved versions not constraint strings; exclude lockFileMaintenance to prevent topic/extra bleed",
+      "description": "terraform: terraform/ prefix, use resolved versions not constraint strings; matchUpdateTypes excludes lockFileMaintenance",
       "matchManagers": ["terraform"],
       "matchUpdateTypes": ["major", "minor", "patch", "pin", "digest"],
       "commitMessageTopic": "terraform/{{depName}}",
       "commitMessageExtra": "from {{currentVersion}} to {{newVersion}}"
     },
     {
-      "description": "github-actions: prefix PR titles with action/, include from/to versions",
+      "description": "github-actions: action/ prefix, strip org keeping only action name, include from/to versions",
       "matchManagers": ["github-actions"],
       "matchUpdateTypes": ["major", "minor", "patch", "pin", "digest"],
-      "commitMessageTopic": "action/{{depName}}",
+      "commitMessageTopic": "action/{{replace '.+/' '' depName}}",
       "commitMessageExtra": "from {{currentValue}} to {{newValue}}"
     }
   ]
