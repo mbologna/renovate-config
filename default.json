@@ -36,7 +36,7 @@
       "matchUpdateTypes": ["major"],
       "minimumReleaseAge": "30 days",
       "automerge": false,
-      "commitMessagePrefix": "major:",
+      "commitMessagePrefix": "chore(major):",
       "reviewers": [
         "mbologna"
       ]
@@ -48,7 +48,7 @@
       "automerge": true,
       "automergeType": "pr",
       "automergeStrategy": "squash",
-      "commitMessagePrefix": "patch:"
+      "commitMessagePrefix": "chore(patch):"
     },
     {
       "description": "Digest updates: hold 7 days (same as patch) before auto-merging on green CI",
@@ -57,7 +57,7 @@
       "automerge": true,
       "automergeType": "pr",
       "automergeStrategy": "squash",
-      "commitMessagePrefix": "digest:"
+      "commitMessagePrefix": "chore(digest):"
     },
     {
       "description": "Pin updates: hold 7 days (same as patch) before auto-merging on green CI",
@@ -66,7 +66,7 @@
       "automerge": true,
       "automergeType": "pr",
       "automergeStrategy": "squash",
-      "commitMessagePrefix": "pin:"
+      "commitMessagePrefix": "chore(pin):"
     },
     {
       "description": "Minor updates: hold 14 days to let the community catch supply-chain attacks before auto-merging on green CI",
@@ -75,7 +75,7 @@
       "automerge": true,
       "automergeType": "pr",
       "automergeStrategy": "squash",
-      "commitMessagePrefix": "minor:"
+      "commitMessagePrefix": "chore(minor):"
     },
     {
       "description": "GitHub Actions: never auto-merge — workflow changes run with repo permissions and are a supply-chain risk",
