@@ -145,9 +145,16 @@
     {
       "description": "github-actions: action/ prefix, strip org keeping only action name, include from/to versions",
       "matchManagers": ["github-actions"],
-      "matchUpdateTypes": ["major", "minor", "patch", "pin", "digest"],
+      "matchUpdateTypes": ["major", "minor", "patch", "pin"],
       "commitMessageTopic": "action/{{replace '.+/' '' depName}}",
       "commitMessageExtra": "from {{currentValue}} to {{newValue}}"
+    },
+    {
+      "description": "github-actions digest: show short SHA instead of meaningless branch-name diff",
+      "matchManagers": ["github-actions"],
+      "matchUpdateTypes": ["digest"],
+      "commitMessageTopic": "action/{{replace '.+/' '' depName}}",
+      "commitMessageExtra": "{{currentDigestShort}} → {{newDigestShort}}"
     }
   ]
 }
