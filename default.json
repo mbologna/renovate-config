@@ -142,6 +142,13 @@
       "commitMessageExtra": "from {{currentValue}} to {{newValue}}"
     },
     {
+      "description": "npm: drop redundant 'dependency' word from topic, use package name directly",
+      "matchManagers": ["npm"],
+      "matchUpdateTypes": ["major", "minor", "patch", "pin", "digest"],
+      "commitMessageTopic": "{{depName}}",
+      "commitMessageExtra": "from {{currentValue}} to {{newValue}}"
+    },
+    {
       "description": "composer: normalize action to lowercase, include from/to versions",
       "matchManagers": ["composer"],
       "matchUpdateTypes": ["major", "minor", "patch"],
