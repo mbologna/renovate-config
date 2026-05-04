@@ -7,6 +7,7 @@
   "labels": [
     "dependencies"
   ],
+  "commitMessageAction": "update",
   "rebaseWhen": "behind-base-branch",
   "platformAutomerge": true,
   "vulnerabilityAlerts": {
@@ -139,7 +140,6 @@
       "matchManagers": ["composer"],
       "matchUpdateTypes": ["major", "minor", "patch"],
       "commitMessageTopic": "{{depName}}",
-      "commitMessageAction": "update",
       "commitMessageExtra": "from {{currentValue}} to {{newValue}}"
     },
     {
