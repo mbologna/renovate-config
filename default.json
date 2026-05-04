@@ -40,49 +40,49 @@
       ]
     },
     {
-      "description": "Group patch updates per package manager; hold 7 days to let the community catch supply-chain attacks before auto-merging on green CI",
+      "description": "Group patch updates across all managers; hold 7 days to let the community catch supply-chain attacks before auto-merging on green CI",
       "matchUpdateTypes": [
         "patch"
       ],
       "minimumReleaseAge": "7 days",
-      "groupName": "patch updates ({{manager}})",
-      "groupSlug": "patch-{{manager}}",
+      "groupName": "patch updates",
+      "groupSlug": "patch",
       "automerge": true,
       "automergeType": "pr",
       "automergeStrategy": "squash"
     },
     {
-      "description": "Group digest updates per package manager; hold 7 days (same as patch) before auto-merging on green CI",
+      "description": "Group digest updates across all managers; hold 7 days (same as patch) before auto-merging on green CI",
       "matchUpdateTypes": [
         "digest"
       ],
       "minimumReleaseAge": "7 days",
-      "groupName": "digest updates ({{manager}})",
-      "groupSlug": "digest-{{manager}}",
+      "groupName": "digest updates",
+      "groupSlug": "digest",
       "automerge": true,
       "automergeType": "pr",
       "automergeStrategy": "squash"
     },
     {
-      "description": "Group pin updates per package manager; hold 7 days (same as patch) before auto-merging on green CI",
+      "description": "Group pin updates across all managers; hold 7 days (same as patch) before auto-merging on green CI",
       "matchUpdateTypes": [
         "pin"
       ],
       "minimumReleaseAge": "7 days",
-      "groupName": "pin updates ({{manager}})",
-      "groupSlug": "pin-{{manager}}",
+      "groupName": "pin updates",
+      "groupSlug": "pin",
       "automerge": true,
       "automergeType": "pr",
       "automergeStrategy": "squash"
     },
     {
-      "description": "Group minor updates per package manager; hold 14 days to let the community catch supply-chain attacks before auto-merging on green CI",
+      "description": "Group minor updates across all managers; hold 14 days to let the community catch supply-chain attacks before auto-merging on green CI",
       "matchUpdateTypes": [
         "minor"
       ],
       "minimumReleaseAge": "14 days",
-      "groupName": "minor updates ({{manager}})",
-      "groupSlug": "minor-{{manager}}",
+      "groupName": "minor updates",
+      "groupSlug": "minor",
       "automerge": true,
       "automergeType": "pr",
       "automergeStrategy": "squash"
@@ -92,7 +92,8 @@
       "matchManagers": [
         "github-actions"
       ],
-      "automerge": false
+      "automerge": false,
+      "groupName": null
     },
     {
       "description": "mbologna/.github reusable workflows: already age-gated by that repo's own Renovate run — skip stability window and automerge on green CI",
