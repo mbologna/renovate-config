@@ -8,6 +8,7 @@
     "dependencies"
   ],
   "commitMessageAction": "update",
+  "commitMessagePrefix": "chore(deps):",
   "rebaseWhen": "behind-base-branch",
   "platformAutomerge": true,
   "vulnerabilityAlerts": {
@@ -36,7 +37,6 @@
       "matchUpdateTypes": ["major"],
       "minimumReleaseAge": "30 days",
       "automerge": false,
-      "commitMessagePrefix": "chore(major):",
       "reviewers": [
         "mbologna"
       ]
@@ -47,8 +47,7 @@
       "minimumReleaseAge": "7 days",
       "automerge": true,
       "automergeType": "pr",
-      "automergeStrategy": "squash",
-      "commitMessagePrefix": "chore(patch):"
+      "automergeStrategy": "squash"
     },
     {
       "description": "Digest updates: hold 7 days (same as patch) before auto-merging on green CI",
@@ -56,8 +55,7 @@
       "minimumReleaseAge": "7 days",
       "automerge": true,
       "automergeType": "pr",
-      "automergeStrategy": "squash",
-      "commitMessagePrefix": "chore(digest):"
+      "automergeStrategy": "squash"
     },
     {
       "description": "Pin updates: hold 7 days (same as patch) before auto-merging on green CI",
@@ -65,8 +63,7 @@
       "minimumReleaseAge": "7 days",
       "automerge": true,
       "automergeType": "pr",
-      "automergeStrategy": "squash",
-      "commitMessagePrefix": "chore(pin):"
+      "automergeStrategy": "squash"
     },
     {
       "description": "Minor updates: hold 14 days to let the community catch supply-chain attacks before auto-merging on green CI",
@@ -74,8 +71,7 @@
       "minimumReleaseAge": "14 days",
       "automerge": true,
       "automergeType": "pr",
-      "automergeStrategy": "squash",
-      "commitMessagePrefix": "chore(minor):"
+      "automergeStrategy": "squash"
     },
     {
       "description": "GitHub Actions: never auto-merge — workflow changes run with repo permissions and are a supply-chain risk",
@@ -102,11 +98,11 @@
       "schedule": ["at any time"]
     },
     {
-      "description": "Regex-managed versions: one PR per package; commitMessageExtra overrides config:recommended docker preset to include from/to versions",
+      "description": "Regex-managed versions: one PR per package; include from/to versions and update type",
       "matchManagers": ["regex"],
       "groupName": null,
       "commitMessageTopic": "{{depName}}",
-      "commitMessageExtra": "from {{currentValue}} to {{newValue}}"
+      "commitMessageExtra": "from {{currentValue}} to {{newValue}} ({{updateType}})"
     },
     {
       "description": "Regex-managed helm charts: add helm/ prefix (overrides generic regex rule above)",
@@ -115,60 +111,60 @@
       "commitMessageTopic": "helm/{{depName}}"
     },
     {
-      "description": "kubernetes images: docker/ prefix, strip org/registry path keeping only image name, include from/to versions",
+      "description": "kubernetes images: docker/ prefix, strip org/registry path keeping only image name, include from/to versions and update type",
       "matchManagers": ["kubernetes"],
       "matchUpdateTypes": ["major", "minor", "patch", "pin", "digest"],
       "commitMessageTopic": "docker/{{replace '.+/' '' depName}}",
-      "commitMessageExtra": "from {{currentValue}} to {{newValue}}"
+      "commitMessageExtra": "from {{currentValue}} to {{newValue}} ({{updateType}})"
     },
     {
-      "description": "argocd: helm/ prefix, strip org/registry path keeping only chart name, include from/to versions",
+      "description": "argocd: helm/ prefix, strip org/registry path keeping only chart name, include from/to versions and update type",
       "matchManagers": ["argocd"],
       "matchUpdateTypes": ["major", "minor", "patch", "pin", "digest"],
       "commitMessageTopic": "helm/{{replace '.+/' '' depName}}",
-      "commitMessageExtra": "from {{currentValue}} to {{newValue}}"
+      "commitMessageExtra": "from {{currentValue}} to {{newValue}} ({{updateType}})"
     },
     {
-      "description": "terraform: terraform/ prefix, use resolved versions not constraint strings; matchUpdateTypes excludes lockFileMaintenance",
+      "description": "terraform: terraform/ prefix, use resolved versions not constraint strings, include update type",
       "matchManagers": ["terraform"],
       "matchUpdateTypes": ["major", "minor", "patch", "pin", "digest"],
       "commitMessageTopic": "terraform/{{depName}}",
-      "commitMessageExtra": "from {{currentVersion}} to {{newVersion}}"
+      "commitMessageExtra": "from {{currentVersion}} to {{newVersion}} ({{updateType}})"
     },
     {
-      "description": "dockerfile: docker/ prefix, strip org/registry path keeping only image name, include from/to versions",
+      "description": "dockerfile: docker/ prefix, strip org/registry path keeping only image name, include from/to versions and update type",
       "matchManagers": ["dockerfile"],
       "matchUpdateTypes": ["major", "minor", "patch", "pin", "digest"],
       "commitMessageTopic": "docker/{{replace '.+/' '' depName}}",
-      "commitMessageExtra": "from {{currentValue}} to {{newValue}}"
+      "commitMessageExtra": "from {{currentValue}} to {{newValue}} ({{updateType}})"
     },
     {
-      "description": "npm: drop redundant 'dependency' word from topic; use resolved versions (currentVersion/newVersion) not constraint strings",
+      "description": "npm: drop redundant 'dependency' word from topic; use resolved versions not constraint strings, include update type",
       "matchManagers": ["npm"],
       "matchUpdateTypes": ["major", "minor", "patch", "pin", "digest"],
       "commitMessageTopic": "{{depName}}",
-      "commitMessageExtra": "from {{currentVersion}} to {{newVersion}}"
+      "commitMessageExtra": "from {{currentVersion}} to {{newVersion}} ({{updateType}})"
     },
     {
-      "description": "composer: normalize action to lowercase, include from/to versions",
+      "description": "composer: include from/to versions and update type",
       "matchManagers": ["composer"],
       "matchUpdateTypes": ["major", "minor", "patch"],
       "commitMessageTopic": "{{depName}}",
-      "commitMessageExtra": "from {{currentValue}} to {{newValue}}"
+      "commitMessageExtra": "from {{currentValue}} to {{newValue}} ({{updateType}})"
     },
     {
-      "description": "github-actions: action/ prefix, strip org keeping only action name, include from/to versions",
+      "description": "github-actions: action/ prefix, strip org keeping only action name, include from/to versions and update type",
       "matchManagers": ["github-actions"],
       "matchUpdateTypes": ["major", "minor", "patch", "pin"],
       "commitMessageTopic": "action/{{replace '.+/' '' depName}}",
-      "commitMessageExtra": "from {{currentValue}} to {{newValue}}"
+      "commitMessageExtra": "from {{currentValue}} to {{newValue}} ({{updateType}})"
     },
     {
       "description": "github-actions digest: show short SHA instead of meaningless branch-name diff",
       "matchManagers": ["github-actions"],
       "matchUpdateTypes": ["digest"],
       "commitMessageTopic": "action/{{replace '.+/' '' depName}}",
-      "commitMessageExtra": "{{currentDigestShort}} → {{newDigestShort}}"
+      "commitMessageExtra": "{{currentDigestShort}} → {{newDigestShort}} (digest)"
     }
   ]
 }
