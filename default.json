@@ -35,7 +35,6 @@
     "enabled": true,
     "automerge": true,
     "automergeStrategy": "merge",
-    "commitMessagePrefix": "chore(deps):",
     "commitMessageAction": "maintain",
     "commitMessageTopic": "lock files",
     "schedule": [
@@ -302,11 +301,12 @@
       "commitMessageExtra": "{{currentDigestShort}} -> {{newDigestShort}} (digest)"
     },
     {
-      "description": "cargo: rust/ prefix, use resolved versions, include update type",
+      "description": "cargo: rust/ prefix, use resolved versions, include update type; bump range lower bound to the new version rather than widening the constraint",
       "matchManagers": ["cargo"],
       "matchUpdateTypes": ["major", "minor", "patch", "pin"],
       "commitMessageTopic": "rust/{{depName}}",
-      "commitMessageExtra": "from {{currentVersion}} to {{newVersion}} ({{updateType}})"
+      "commitMessageExtra": "from {{currentVersion}} to {{newVersion}} ({{updateType}})",
+      "rangeStrategy": "bump"
     },
     {
       "description": "cargo digest: show short SHA instead of meaningless ref diff",
