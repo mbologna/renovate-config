@@ -113,9 +113,16 @@
     {
       "description": "kubernetes images: docker/ prefix, strip org/registry path keeping only image name, include from/to versions and update type",
       "matchManagers": ["kubernetes"],
-      "matchUpdateTypes": ["major", "minor", "patch", "pin", "digest"],
+      "matchUpdateTypes": ["major", "minor", "patch", "pin"],
       "commitMessageTopic": "docker/{{replace '.+/' '' depName}}",
       "commitMessageExtra": "from {{currentValue}} to {{newValue}} ({{updateType}})"
+    },
+    {
+      "description": "kubernetes images digest: show short SHA instead of meaningless tag-name diff (e.g. latest to latest)",
+      "matchManagers": ["kubernetes"],
+      "matchUpdateTypes": ["digest"],
+      "commitMessageTopic": "docker/{{replace '.+/' '' depName}}",
+      "commitMessageExtra": "{{currentDigestShort}} → {{newDigestShort}} (digest)"
     },
     {
       "description": "argocd: helm/ prefix, strip org/registry path keeping only chart name, include from/to versions and update type",
@@ -134,15 +141,22 @@
     {
       "description": "dockerfile: docker/ prefix, strip org/registry path keeping only image name, include from/to versions and update type",
       "matchManagers": ["dockerfile"],
-      "matchUpdateTypes": ["major", "minor", "patch", "pin", "digest"],
+      "matchUpdateTypes": ["major", "minor", "patch", "pin"],
       "commitMessageTopic": "docker/{{replace '.+/' '' depName}}",
       "commitMessageExtra": "from {{currentValue}} to {{newValue}} ({{updateType}})"
     },
     {
-      "description": "npm: drop redundant 'dependency' word from topic; use resolved versions not constraint strings, include update type",
+      "description": "dockerfile digest: show short SHA instead of meaningless tag-name diff",
+      "matchManagers": ["dockerfile"],
+      "matchUpdateTypes": ["digest"],
+      "commitMessageTopic": "docker/{{replace '.+/' '' depName}}",
+      "commitMessageExtra": "{{currentDigestShort}} → {{newDigestShort}} (digest)"
+    },
+    {
+      "description": "npm: add npm/ prefix, use resolved versions not constraint strings, include update type",
       "matchManagers": ["npm"],
       "matchUpdateTypes": ["major", "minor", "patch", "pin", "digest"],
-      "commitMessageTopic": "{{depName}}",
+      "commitMessageTopic": "npm/{{depName}}",
       "commitMessageExtra": "from {{currentVersion}} to {{newVersion}} ({{updateType}})"
     },
     {
@@ -155,9 +169,17 @@
     {
       "description": "github-actions: action/ prefix, strip org keeping only action name, include from/to versions and update type",
       "matchManagers": ["github-actions"],
-      "matchUpdateTypes": ["major", "minor", "patch", "pin"],
+      "matchUpdateTypes": ["major", "minor", "patch"],
       "commitMessageTopic": "action/{{replace '.+/' '' depName}}",
       "commitMessageExtra": "from {{currentValue}} to {{newValue}} ({{updateType}})"
+    },
+    {
+      "description": "github-actions pin: lowercase action word and show target SHA (built-in uses capital Pin and overrides topic)",
+      "matchManagers": ["github-actions"],
+      "matchUpdateTypes": ["pin"],
+      "commitMessageAction": "pin",
+      "commitMessageTopic": "action/{{replace '.+/' '' depName}}",
+      "commitMessageExtra": "to {{newDigestShort}}"
     },
     {
       "description": "github-actions digest: show short SHA instead of meaningless branch-name diff",
