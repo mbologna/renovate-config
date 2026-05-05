@@ -13,7 +13,6 @@
   "rebaseWhen": "behind-base-branch",
   "platformAutomerge": true,
   "automergeStrategy": "squash",
-  "automergeType": "pr",
   "separateMultipleMajor": true,
   "transitiveRemediation": true,
   "ignorePaths": ["**/vendor/**"],
@@ -233,7 +232,7 @@
     {
       "description": "pip_requirements: pip/ prefix, use constraint strings (deps may be unpinned), include update type",
       "matchManagers": ["pip_requirements"],
-      "matchUpdateTypes": ["major", "minor", "patch", "pin", "digest"],
+      "matchUpdateTypes": ["major", "minor", "patch", "pin"],
       "commitMessageTopic": "pip/{{depName}}",
       "commitMessageExtra": "from {{currentValue}} to {{newValue}} ({{updateType}})"
     },
@@ -247,9 +246,16 @@
     {
       "description": "pep621/uv: pip/ prefix, use resolved versions (always pinned), include update type",
       "matchManagers": ["pep621", "uv"],
-      "matchUpdateTypes": ["major", "minor", "patch", "pin", "digest"],
+      "matchUpdateTypes": ["major", "minor", "patch", "pin"],
       "commitMessageTopic": "pip/{{depName}}",
       "commitMessageExtra": "from {{currentVersion}} to {{newVersion}} ({{updateType}})"
+    },
+    {
+      "description": "pep621/uv digest: show short SHA instead of meaningless ref diff",
+      "matchManagers": ["pep621", "uv"],
+      "matchUpdateTypes": ["digest"],
+      "commitMessageTopic": "pip/{{depName}}",
+      "commitMessageExtra": "{{currentDigestShort}} -> {{newDigestShort}} (digest)"
     },
     {
       "description": "pre-commit hooks: hook/ prefix, strip org keeping only hook name, include from/to versions and update type",
@@ -334,6 +340,13 @@
       "matchUpdateTypes": ["major", "minor", "patch", "pin"],
       "commitMessageTopic": "gradle/{{depName}}",
       "commitMessageExtra": "from {{currentVersion}} to {{newVersion}} ({{updateType}})"
+    },
+    {
+      "description": "nvm/.nvmrc/.node-version: node/ prefix, include from/to versions and update type",
+      "matchManagers": ["nvm"],
+      "matchUpdateTypes": ["major", "minor", "patch", "pin"],
+      "commitMessageTopic": "node/{{depName}}",
+      "commitMessageExtra": "from {{currentValue}} to {{newValue}} ({{updateType}})"
     }
   ]
 }
