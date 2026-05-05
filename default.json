@@ -79,12 +79,13 @@
       "groupName": null
     },
     {
-      "description": "mbologna/.github reusable workflows: already age-gated by that repo's own Renovate run — skip stability window, bypass schedule, and automerge on green CI",
+      "description": "mbologna/.github reusable workflows: already age-gated by that repo's own Renovate run — skip stability window, bypass schedule, automerge on green CI, and clear reviewer assigned by the major rule",
       "matchManagers": ["github-actions"],
       "matchDepNames": ["mbologna/.github"],
       "minimumReleaseAge": "0 days",
       "schedule": ["at any time"],
-      "automerge": true
+      "automerge": true,
+      "reviewers": []
     },
     {
       "description": "Security/CVE updates: bypass age gate and maintenance windows, jump the queue with prPriority 10, automerge immediately on green CI",
@@ -112,7 +113,7 @@
       "commitMessageExtra": "{{currentDigestShort}} -> {{newDigestShort}} (digest)"
     },
     {
-      "description": "Regex-managed helm charts: add helm/ prefix (overrides generic regex rule above)",
+      "description": "Regex-managed helm charts: add helm/ prefix, overrides topic from both version and digest regex rules above — commitMessageExtra is inherited from whichever of those matched first",
       "matchManagers": ["regex"],
       "matchDatasources": ["helm"],
       "commitMessageTopic": "helm/{{depName}}"
@@ -175,10 +176,10 @@
       "postUpdateOptions": ["npmDedupe"]
     },
     {
-      "description": "composer: include from/to resolved versions and update type",
+      "description": "composer: composer/ prefix, from/to resolved versions and update type",
       "matchManagers": ["composer"],
-      "matchUpdateTypes": ["major", "minor", "patch"],
-      "commitMessageTopic": "{{depName}}",
+      "matchUpdateTypes": ["major", "minor", "patch", "pin"],
+      "commitMessageTopic": "composer/{{depName}}",
       "commitMessageExtra": "from {{currentVersion}} to {{newVersion}} ({{updateType}})"
     },
     {
@@ -225,10 +226,10 @@
       "commitMessageExtra": "{{currentDigestShort}} -> {{newDigestShort}} (digest)"
     },
     {
-      "description": "bundler: include from/to resolved versions and update type",
+      "description": "bundler: gem/ prefix, from/to resolved versions and update type",
       "matchManagers": ["bundler"],
-      "matchUpdateTypes": ["major", "minor", "patch"],
-      "commitMessageTopic": "{{depName}}",
+      "matchUpdateTypes": ["major", "minor", "patch", "pin"],
+      "commitMessageTopic": "gem/{{depName}}",
       "commitMessageExtra": "from {{currentVersion}} to {{newVersion}} ({{updateType}})"
     }
   ]
