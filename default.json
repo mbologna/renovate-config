@@ -80,7 +80,8 @@
       "description": "GitHub Actions: never auto-merge — workflow changes run with repo permissions and are a supply-chain risk",
       "matchManagers": ["github-actions"],
       "automerge": false,
-      "groupName": null
+      "groupName": null,
+      "reviewers": ["mbologna"]
     },
     {
       "description": "mbologna/.github reusable workflows: already age-gated by that repo's own Renovate run — skip stability window, bypass schedule, automerge on green CI, and clear reviewer assigned by the major rule",
