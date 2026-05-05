@@ -15,7 +15,6 @@
   "automergeStrategy": "squash",
   "separateMultipleMajor": true,
   "transitiveRemediation": true,
-  "ignorePaths": ["**/vendor/**"],
   "dependencyDashboardTitle": "🤖 Renovate Dependency Dashboard",
   "dependencyDashboardLabels": ["renovate"],
   "vulnerabilityAlerts": {
@@ -258,11 +257,11 @@
       "commitMessageExtra": "{{currentDigestShort}} -> {{newDigestShort}} (digest)"
     },
     {
-      "description": "pre-commit hooks: hook/ prefix, strip org keeping only hook name, include from/to versions and update type",
+      "description": "pre-commit hooks: hook/ prefix, strip org keeping only hook name, include from/to versions and update type; use currentValue/newValue (raw tag) since some repos use non-semver tags where currentVersion would be empty",
       "matchManagers": ["pre-commit"],
       "matchUpdateTypes": ["major", "minor", "patch", "pin"],
       "commitMessageTopic": "hook/{{replace '.+/' '' depName}}",
-      "commitMessageExtra": "from {{currentVersion}} to {{newVersion}} ({{updateType}})"
+      "commitMessageExtra": "from {{currentValue}} to {{newValue}} ({{updateType}})"
     },
     {
       "description": "pre-commit hooks digest: show short SHA instead of meaningless ref diff",
@@ -318,7 +317,8 @@
       "matchManagers": ["gomod"],
       "matchUpdateTypes": ["major", "minor", "patch", "pin"],
       "commitMessageTopic": "go/{{depName}}",
-      "commitMessageExtra": "from {{currentVersion}} to {{newVersion}} ({{updateType}})"
+      "commitMessageExtra": "from {{currentVersion}} to {{newVersion}} ({{updateType}})",
+      "ignorePaths": ["**/vendor/**"]
     },
     {
       "description": "gomod digest: show short SHA instead of meaningless ref diff",
