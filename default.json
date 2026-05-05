@@ -238,6 +238,13 @@
       "commitMessageExtra": "from {{currentValue}} to {{newValue}} ({{updateType}})"
     },
     {
+      "description": "pip_requirements digest: show short SHA instead of meaningless ref diff",
+      "matchManagers": ["pip_requirements"],
+      "matchUpdateTypes": ["digest"],
+      "commitMessageTopic": "pip/{{depName}}",
+      "commitMessageExtra": "{{currentDigestShort}} -> {{newDigestShort}} (digest)"
+    },
+    {
       "description": "pep621/uv: pip/ prefix, use resolved versions (always pinned), include update type",
       "matchManagers": ["pep621", "uv"],
       "matchUpdateTypes": ["major", "minor", "patch", "pin", "digest"],
@@ -285,6 +292,48 @@
       "matchUpdateTypes": ["digest"],
       "commitMessageTopic": "docker/{{replace '.+/' '' depName}}",
       "commitMessageExtra": "{{currentDigestShort}} -> {{newDigestShort}} (digest)"
+    },
+    {
+      "description": "cargo: rust/ prefix, use resolved versions, include update type",
+      "matchManagers": ["cargo"],
+      "matchUpdateTypes": ["major", "minor", "patch", "pin"],
+      "commitMessageTopic": "rust/{{depName}}",
+      "commitMessageExtra": "from {{currentVersion}} to {{newVersion}} ({{updateType}})"
+    },
+    {
+      "description": "cargo digest: show short SHA instead of meaningless ref diff",
+      "matchManagers": ["cargo"],
+      "matchUpdateTypes": ["digest"],
+      "commitMessageTopic": "rust/{{depName}}",
+      "commitMessageExtra": "{{currentDigestShort}} -> {{newDigestShort}} (digest)"
+    },
+    {
+      "description": "gomod: go/ prefix, use resolved versions, include update type",
+      "matchManagers": ["gomod"],
+      "matchUpdateTypes": ["major", "minor", "patch", "pin"],
+      "commitMessageTopic": "go/{{depName}}",
+      "commitMessageExtra": "from {{currentVersion}} to {{newVersion}} ({{updateType}})"
+    },
+    {
+      "description": "gomod digest: show short SHA instead of meaningless ref diff",
+      "matchManagers": ["gomod"],
+      "matchUpdateTypes": ["digest"],
+      "commitMessageTopic": "go/{{depName}}",
+      "commitMessageExtra": "{{currentDigestShort}} -> {{newDigestShort}} (digest)"
+    },
+    {
+      "description": "maven: maven/ prefix, use resolved versions, include update type",
+      "matchManagers": ["maven"],
+      "matchUpdateTypes": ["major", "minor", "patch", "pin"],
+      "commitMessageTopic": "maven/{{depName}}",
+      "commitMessageExtra": "from {{currentVersion}} to {{newVersion}} ({{updateType}})"
+    },
+    {
+      "description": "gradle/gradle-wrapper: gradle/ prefix, use resolved versions, include update type",
+      "matchManagers": ["gradle", "gradle-wrapper"],
+      "matchUpdateTypes": ["major", "minor", "patch", "pin"],
+      "commitMessageTopic": "gradle/{{depName}}",
+      "commitMessageExtra": "from {{currentVersion}} to {{newVersion}} ({{updateType}})"
     }
   ]
 }
