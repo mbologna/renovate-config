@@ -24,13 +24,15 @@
     ],
     "commitMessagePrefix": "fix(security):",
     "minimumReleaseAge": "0 days",
+    "schedule": ["at any time"],
     "automerge": true
   },
   "lockFileMaintenance": {
     "enabled": true,
     "automerge": true,
     "commitMessagePrefix": "chore(deps):",
-    "commitMessageAction": "lock file maintenance",
+    "commitMessageAction": "maintain",
+    "commitMessageTopic": "lock files",
     "schedule": [
       "before 9am on monday"
     ]
@@ -40,6 +42,7 @@
       "description": "Major updates: hold 30 days to let the ecosystem surface breaking changes and incompatibilities, then assign for manual review — no auto-merge",
       "matchUpdateTypes": ["major"],
       "minimumReleaseAge": "30 days",
+      "labels": ["major"],
       "automerge": false,
       "reviewers": [
         "mbologna"
@@ -210,9 +213,16 @@
     {
       "description": "pre-commit hooks: include from/to versions and update type",
       "matchManagers": ["pre-commit"],
-      "matchUpdateTypes": ["major", "minor", "patch"],
+      "matchUpdateTypes": ["major", "minor", "patch", "pin"],
       "commitMessageTopic": "{{depName}}",
       "commitMessageExtra": "from {{currentVersion}} to {{newVersion}} ({{updateType}})"
+    },
+    {
+      "description": "pre-commit hooks digest: show short SHA instead of meaningless ref diff",
+      "matchManagers": ["pre-commit"],
+      "matchUpdateTypes": ["digest"],
+      "commitMessageTopic": "{{depName}}",
+      "commitMessageExtra": "{{currentDigestShort}} -> {{newDigestShort}} (digest)"
     },
     {
       "description": "bundler: include from/to resolved versions and update type",
