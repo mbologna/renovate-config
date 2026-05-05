@@ -1,5 +1,6 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "configMigration": true,
   "prCreation": "not-pending",
   "pinDigests": true,
   "dependencyDashboard": true,
@@ -18,6 +19,7 @@
   "ignorePaths": ["**/vendor/**"],
   "dependencyDashboardTitle": "🤖 Renovate Dependency Dashboard",
   "vulnerabilityAlerts": {
+    "description": "CVE-triggered PRs (OSV/GitHub Advisory on a version you use): add security label, fix(security): prefix, bypass age gate and schedule, automerge on green CI",
     "labels": [
       "dependencies",
       "security"
@@ -89,7 +91,7 @@
       "reviewers": []
     },
     {
-      "description": "Security/CVE updates: bypass age gate and maintenance windows, jump the queue with prPriority 10, automerge immediately on green CI",
+      "description": "Security-categorised packages (e.g. cryptography, openssl — any update, not just CVE-triggered): fix(security): prefix, bypass age gate and schedule, jump queue with prPriority 10, automerge on green CI. Settings intentionally mirror vulnerabilityAlerts so both paths get the same urgency; prPriority is the only setting not covered there.",
       "matchCategories": ["security"],
       "commitMessagePrefix": "fix(security):",
       "minimumReleaseAge": "0 days",
@@ -198,6 +200,13 @@
       "commitMessageExtra": "from {{currentVersion}} to {{newVersion}} ({{updateType}})"
     },
     {
+      "description": "composer digest: show short SHA instead of meaningless ref diff",
+      "matchManagers": ["composer"],
+      "matchUpdateTypes": ["digest"],
+      "commitMessageTopic": "composer/{{depName}}",
+      "commitMessageExtra": "{{currentDigestShort}} -> {{newDigestShort}} (digest)"
+    },
+    {
       "description": "github-actions: action/ prefix, strip org keeping only action name, include from/to versions and update type",
       "matchManagers": ["github-actions"],
       "matchUpdateTypes": ["major", "minor", "patch"],
@@ -253,6 +262,13 @@
       "matchUpdateTypes": ["major", "minor", "patch", "pin"],
       "commitMessageTopic": "gem/{{depName}}",
       "commitMessageExtra": "from {{currentVersion}} to {{newVersion}} ({{updateType}})"
+    },
+    {
+      "description": "bundler digest: show short SHA instead of meaningless ref diff",
+      "matchManagers": ["bundler"],
+      "matchUpdateTypes": ["digest"],
+      "commitMessageTopic": "gem/{{depName}}",
+      "commitMessageExtra": "{{currentDigestShort}} -> {{newDigestShort}} (digest)"
     }
   ]
 }
