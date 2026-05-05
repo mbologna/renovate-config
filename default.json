@@ -187,7 +187,7 @@
     {
       "description": "npm: add npm/ prefix, use resolved versions not constraint strings, include update type; dedupe lock file after each update",
       "matchManagers": ["npm"],
-      "matchUpdateTypes": ["major", "minor", "patch", "pin", "digest"],
+      "matchUpdateTypes": ["major", "minor", "patch", "pin"],
       "commitMessageTopic": "npm/{{depName}}",
       "commitMessageExtra": "from {{currentVersion}} to {{newVersion}} ({{updateType}})",
       "postUpdateOptions": ["npmDedupe"]
@@ -325,7 +325,8 @@
       "matchManagers": ["gomod"],
       "matchUpdateTypes": ["digest"],
       "commitMessageTopic": "go/{{depName}}",
-      "commitMessageExtra": "{{currentDigestShort}} -> {{newDigestShort}} (digest)"
+      "commitMessageExtra": "{{currentDigestShort}} -> {{newDigestShort}} (digest)",
+      "ignorePaths": ["**/vendor/**"]
     },
     {
       "description": "maven: maven/ prefix, use resolved versions, include update type",
