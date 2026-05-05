@@ -18,6 +18,7 @@
   "transitiveRemediation": true,
   "ignorePaths": ["**/vendor/**"],
   "dependencyDashboardTitle": "🤖 Renovate Dependency Dashboard",
+  "dependencyDashboardLabels": ["renovate"],
   "vulnerabilityAlerts": {
     "description": "CVE-triggered PRs (OSV/GitHub Advisory on a version you use): add security label, fix(security): prefix, bypass age gate and schedule, automerge on green CI",
     "labels": [
@@ -243,17 +244,17 @@
       "commitMessageExtra": "from {{currentVersion}} to {{newVersion}} ({{updateType}})"
     },
     {
-      "description": "pre-commit hooks: include from/to versions and update type",
+      "description": "pre-commit hooks: hook/ prefix, strip org keeping only hook name, include from/to versions and update type",
       "matchManagers": ["pre-commit"],
       "matchUpdateTypes": ["major", "minor", "patch", "pin"],
-      "commitMessageTopic": "{{depName}}",
+      "commitMessageTopic": "hook/{{replace '.+/' '' depName}}",
       "commitMessageExtra": "from {{currentVersion}} to {{newVersion}} ({{updateType}})"
     },
     {
       "description": "pre-commit hooks digest: show short SHA instead of meaningless ref diff",
       "matchManagers": ["pre-commit"],
       "matchUpdateTypes": ["digest"],
-      "commitMessageTopic": "{{depName}}",
+      "commitMessageTopic": "hook/{{replace '.+/' '' depName}}",
       "commitMessageExtra": "{{currentDigestShort}} -> {{newDigestShort}} (digest)"
     },
     {
@@ -268,6 +269,20 @@
       "matchManagers": ["bundler"],
       "matchUpdateTypes": ["digest"],
       "commitMessageTopic": "gem/{{depName}}",
+      "commitMessageExtra": "{{currentDigestShort}} -> {{newDigestShort}} (digest)"
+    },
+    {
+      "description": "docker-compose: docker/ prefix, strip org/registry keeping only image name, include from/to versions and update type",
+      "matchManagers": ["docker-compose"],
+      "matchUpdateTypes": ["major", "minor", "patch", "pin"],
+      "commitMessageTopic": "docker/{{replace '.+/' '' depName}}",
+      "commitMessageExtra": "from {{currentValue}} to {{newValue}} ({{updateType}})"
+    },
+    {
+      "description": "docker-compose digest: show short SHA instead of meaningless tag-name diff",
+      "matchManagers": ["docker-compose"],
+      "matchUpdateTypes": ["digest"],
+      "commitMessageTopic": "docker/{{replace '.+/' '' depName}}",
       "commitMessageExtra": "{{currentDigestShort}} -> {{newDigestShort}} (digest)"
     }
   ]
