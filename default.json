@@ -30,6 +30,7 @@
   "lockFileMaintenance": {
     "enabled": true,
     "automerge": true,
+    "automergeStrategy": "merge",
     "commitMessagePrefix": "chore(deps):",
     "commitMessageAction": "maintain",
     "commitMessageTopic": "lock files",
@@ -149,7 +150,7 @@
     {
       "description": "terraform: terraform/ prefix, use resolved versions not constraint strings, include update type",
       "matchManagers": ["terraform"],
-      "matchUpdateTypes": ["major", "minor", "patch", "pin", "digest"],
+      "matchUpdateTypes": ["major", "minor", "patch", "pin"],
       "commitMessageTopic": "terraform/{{depName}}",
       "commitMessageExtra": "from {{currentVersion}} to {{newVersion}} ({{updateType}})"
     },
@@ -205,8 +206,15 @@
       "commitMessageExtra": "{{currentDigestShort}} -> {{newDigestShort}} (digest)"
     },
     {
-      "description": "pip/pyproject/uv: add pip/ prefix, use resolved versions, include update type",
-      "matchManagers": ["pip_requirements", "pep621", "uv"],
+      "description": "pip_requirements: pip/ prefix, use constraint strings (deps may be unpinned), include update type",
+      "matchManagers": ["pip_requirements"],
+      "matchUpdateTypes": ["major", "minor", "patch", "pin", "digest"],
+      "commitMessageTopic": "pip/{{depName}}",
+      "commitMessageExtra": "from {{currentValue}} to {{newValue}} ({{updateType}})"
+    },
+    {
+      "description": "pep621/uv: pip/ prefix, use resolved versions (always pinned), include update type",
+      "matchManagers": ["pep621", "uv"],
       "matchUpdateTypes": ["major", "minor", "patch", "pin", "digest"],
       "commitMessageTopic": "pip/{{depName}}",
       "commitMessageExtra": "from {{currentVersion}} to {{newVersion}} ({{updateType}})"
