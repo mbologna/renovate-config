@@ -165,11 +165,12 @@
       "commitMessageExtra": "{{currentDigestShort}} -> {{newDigestShort}} (digest)"
     },
     {
-      "description": "terraform: terraform/ prefix, use resolved versions not constraint strings, include update type",
+      "description": "terraform: terraform/ prefix, use resolved versions not constraint strings, include update type; bump range lower bound to the new version rather than widening the constraint",
       "matchManagers": ["terraform"],
       "matchUpdateTypes": ["major", "minor", "patch", "pin"],
       "commitMessageTopic": "terraform/{{depName}}",
-      "commitMessageExtra": "from {{currentVersion}} to {{newVersion}} ({{updateType}})"
+      "commitMessageExtra": "from {{currentVersion}} to {{newVersion}} ({{updateType}})",
+      "rangeStrategy": "bump"
     },
     {
       "description": "dockerfile: docker/ prefix, strip org/registry path keeping only image name, include from/to versions and update type",
