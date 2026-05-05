@@ -28,6 +28,9 @@
     "schedule": ["at any time"],
     "automerge": true
   },
+  "gomod": {
+    "ignorePaths": ["**/vendor/**"]
+  },
   "lockFileMaintenance": {
     "enabled": true,
     "automerge": true,
@@ -317,16 +320,14 @@
       "matchManagers": ["gomod"],
       "matchUpdateTypes": ["major", "minor", "patch", "pin"],
       "commitMessageTopic": "go/{{depName}}",
-      "commitMessageExtra": "from {{currentVersion}} to {{newVersion}} ({{updateType}})",
-      "ignorePaths": ["**/vendor/**"]
+      "commitMessageExtra": "from {{currentVersion}} to {{newVersion}} ({{updateType}})"
     },
     {
       "description": "gomod digest: show short SHA instead of meaningless ref diff",
       "matchManagers": ["gomod"],
       "matchUpdateTypes": ["digest"],
       "commitMessageTopic": "go/{{depName}}",
-      "commitMessageExtra": "{{currentDigestShort}} -> {{newDigestShort}} (digest)",
-      "ignorePaths": ["**/vendor/**"]
+      "commitMessageExtra": "{{currentDigestShort}} -> {{newDigestShort}} (digest)"
     },
     {
       "description": "maven: maven/ prefix, use resolved versions, include update type",
