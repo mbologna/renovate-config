@@ -103,7 +103,7 @@
     },
     {
       "description": "Regex-managed versions: one PR per package; include from/to versions and update type",
-      "matchManagers": ["regex"],
+      "matchManagers": ["regex", "custom.regex"],
       "matchUpdateTypes": ["major", "minor", "patch", "pin"],
       "groupName": null,
       "commitMessageTopic": "{{depName}}",
@@ -111,7 +111,7 @@
     },
     {
       "description": "Regex-managed digest updates: show short SHA instead of meaningless value diff",
-      "matchManagers": ["regex"],
+      "matchManagers": ["regex", "custom.regex"],
       "matchUpdateTypes": ["digest"],
       "groupName": null,
       "commitMessageTopic": "{{depName}}",
@@ -119,7 +119,7 @@
     },
     {
       "description": "Regex-managed helm charts: add helm/ prefix, overrides topic from both version and digest regex rules above — commitMessageExtra is inherited from whichever of those matched first",
-      "matchManagers": ["regex"],
+      "matchManagers": ["regex", "custom.regex"],
       "matchDatasources": ["helm"],
       "commitMessageTopic": "helm/{{depName}}"
     },
