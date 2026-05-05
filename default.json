@@ -9,7 +9,7 @@
   ],
   "commitMessageAction": "update",
   "commitMessagePrefix": "chore(deps):",
-  "rebaseWhen": "auto",
+  "rebaseWhen": "behind-base-branch",
   "platformAutomerge": true,
   "automergeStrategy": "squash",
   "automergeType": "pr",
@@ -143,6 +143,20 @@
     {
       "description": "argocd digest: show short SHA instead of meaningless version-name diff",
       "matchManagers": ["argocd"],
+      "matchUpdateTypes": ["digest"],
+      "commitMessageTopic": "helm/{{replace '.+/' '' depName}}",
+      "commitMessageExtra": "{{currentDigestShort}} -> {{newDigestShort}} (digest)"
+    },
+    {
+      "description": "helmfile/helm-values: helm/ prefix, strip org/registry keeping only chart name, include from/to versions and update type",
+      "matchManagers": ["helmfile", "helm-values"],
+      "matchUpdateTypes": ["major", "minor", "patch", "pin"],
+      "commitMessageTopic": "helm/{{replace '.+/' '' depName}}",
+      "commitMessageExtra": "from {{currentValue}} to {{newValue}} ({{updateType}})"
+    },
+    {
+      "description": "helmfile/helm-values digest: show short SHA instead of meaningless version-name diff",
+      "matchManagers": ["helmfile", "helm-values"],
       "matchUpdateTypes": ["digest"],
       "commitMessageTopic": "helm/{{replace '.+/' '' depName}}",
       "commitMessageExtra": "{{currentDigestShort}} -> {{newDigestShort}} (digest)"
