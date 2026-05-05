@@ -195,11 +195,12 @@
       "postUpdateOptions": ["npmDedupe"]
     },
     {
-      "description": "composer: composer/ prefix, from/to resolved versions and update type",
+      "description": "composer: composer/ prefix, from/to resolved versions and update type; bump range lower bound to the new version rather than widening the constraint",
       "matchManagers": ["composer"],
       "matchUpdateTypes": ["major", "minor", "patch", "pin"],
       "commitMessageTopic": "composer/{{depName}}",
-      "commitMessageExtra": "from {{currentVersion}} to {{newVersion}} ({{updateType}})"
+      "commitMessageExtra": "from {{currentVersion}} to {{newVersion}} ({{updateType}})",
+      "rangeStrategy": "bump"
     },
     {
       "description": "composer digest: show short SHA instead of meaningless ref diff",
@@ -254,6 +255,20 @@
     {
       "description": "pep621/uv digest: show short SHA instead of meaningless ref diff",
       "matchManagers": ["pep621", "uv"],
+      "matchUpdateTypes": ["digest"],
+      "commitMessageTopic": "pip/{{depName}}",
+      "commitMessageExtra": "{{currentDigestShort}} -> {{newDigestShort}} (digest)"
+    },
+    {
+      "description": "pip-compile (requirements.in): pip/ prefix, use constraint strings (input files may be unpinned), include update type",
+      "matchManagers": ["pip-compile"],
+      "matchUpdateTypes": ["major", "minor", "patch", "pin"],
+      "commitMessageTopic": "pip/{{depName}}",
+      "commitMessageExtra": "from {{currentValue}} to {{newValue}} ({{updateType}})"
+    },
+    {
+      "description": "pip-compile digest: show short SHA instead of meaningless ref diff",
+      "matchManagers": ["pip-compile"],
       "matchUpdateTypes": ["digest"],
       "commitMessageTopic": "pip/{{depName}}",
       "commitMessageExtra": "{{currentDigestShort}} -> {{newDigestShort}} (digest)"
