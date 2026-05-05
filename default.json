@@ -11,6 +11,9 @@
   "commitMessagePrefix": "chore(deps):",
   "rebaseWhen": "auto",
   "platformAutomerge": true,
+  "automergeStrategy": "squash",
+  "ignorePaths": ["**/vendor/**"],
+  "dependencyDashboardTitle": "🤖 Renovate Dependency Dashboard",
   "vulnerabilityAlerts": {
     "labels": [
       "dependencies",
@@ -25,7 +28,6 @@
     "enabled": true,
     "automerge": true,
     "automergeType": "pr",
-    "automergeStrategy": "squash",
     "commitMessagePrefix": "chore(deps):",
     "commitMessageAction": "lock file maintenance",
     "schedule": [
@@ -47,32 +49,28 @@
       "matchUpdateTypes": ["patch"],
       "minimumReleaseAge": "7 days",
       "automerge": true,
-      "automergeType": "pr",
-      "automergeStrategy": "squash"
+      "automergeType": "pr"
     },
     {
       "description": "Digest updates: hold 7 days (same as patch) before auto-merging on green CI",
       "matchUpdateTypes": ["digest"],
       "minimumReleaseAge": "7 days",
       "automerge": true,
-      "automergeType": "pr",
-      "automergeStrategy": "squash"
+      "automergeType": "pr"
     },
     {
       "description": "Pin updates: hold 7 days (same as patch) before auto-merging on green CI",
       "matchUpdateTypes": ["pin"],
       "minimumReleaseAge": "7 days",
       "automerge": true,
-      "automergeType": "pr",
-      "automergeStrategy": "squash"
+      "automergeType": "pr"
     },
     {
       "description": "Minor updates: hold 14 days to let the community catch supply-chain attacks before auto-merging on green CI",
       "matchUpdateTypes": ["minor"],
       "minimumReleaseAge": "14 days",
       "automerge": true,
-      "automergeType": "pr",
-      "automergeStrategy": "squash"
+      "automergeType": "pr"
     },
     {
       "description": "GitHub Actions: never auto-merge — workflow changes run with repo permissions and are a supply-chain risk",
@@ -87,8 +85,7 @@
       "minimumReleaseAge": "0 days",
       "schedule": ["at any time"],
       "automerge": true,
-      "automergeType": "pr",
-      "automergeStrategy": "squash"
+      "automergeType": "pr"
     },
     {
       "description": "Security/CVE updates: bypass age gate and maintenance windows, jump the queue with prPriority 10, automerge immediately on green CI",
@@ -130,9 +127,16 @@
     {
       "description": "argocd: helm/ prefix, strip org/registry path keeping only chart name, include from/to versions and update type",
       "matchManagers": ["argocd"],
-      "matchUpdateTypes": ["major", "minor", "patch", "pin", "digest"],
+      "matchUpdateTypes": ["major", "minor", "patch", "pin"],
       "commitMessageTopic": "helm/{{replace '.+/' '' depName}}",
       "commitMessageExtra": "from {{currentValue}} to {{newValue}} ({{updateType}})"
+    },
+    {
+      "description": "argocd digest: show short SHA instead of meaningless version-name diff",
+      "matchManagers": ["argocd"],
+      "matchUpdateTypes": ["digest"],
+      "commitMessageTopic": "helm/{{replace '.+/' '' depName}}",
+      "commitMessageExtra": "{{currentDigestShort}} -> {{newDigestShort}} (digest)"
     },
     {
       "description": "terraform: terraform/ prefix, use resolved versions not constraint strings, include update type",
@@ -190,6 +194,27 @@
       "matchUpdateTypes": ["digest"],
       "commitMessageTopic": "action/{{replace '.+/' '' depName}}",
       "commitMessageExtra": "{{currentDigestShort}} -> {{newDigestShort}} (digest)"
+    },
+    {
+      "description": "pip/pyproject: add pip/ prefix, use resolved versions, include update type",
+      "matchManagers": ["pip_requirements", "pep621"],
+      "matchUpdateTypes": ["major", "minor", "patch", "pin", "digest"],
+      "commitMessageTopic": "pip/{{depName}}",
+      "commitMessageExtra": "from {{currentVersion}} to {{newVersion}} ({{updateType}})"
+    },
+    {
+      "description": "pre-commit hooks: include from/to versions and update type",
+      "matchManagers": ["pre-commit"],
+      "matchUpdateTypes": ["major", "minor", "patch"],
+      "commitMessageTopic": "{{depName}}",
+      "commitMessageExtra": "from {{currentVersion}} to {{newVersion}} ({{updateType}})"
+    },
+    {
+      "description": "bundler: include from/to resolved versions and update type",
+      "matchManagers": ["bundler"],
+      "matchUpdateTypes": ["major", "minor", "patch"],
+      "commitMessageTopic": "{{depName}}",
+      "commitMessageExtra": "from {{currentVersion}} to {{newVersion}} ({{updateType}})"
     }
   ]
 }
