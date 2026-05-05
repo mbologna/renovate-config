@@ -9,13 +9,14 @@
   ],
   "commitMessageAction": "update",
   "commitMessagePrefix": "chore(deps):",
-  "rebaseWhen": "behind-base-branch",
+  "rebaseWhen": "auto",
   "platformAutomerge": true,
   "vulnerabilityAlerts": {
     "labels": [
       "dependencies",
       "security"
     ],
+    "commitMessagePrefix": "fix(security):",
     "minimumReleaseAge": "0 days",
     "automerge": true,
     "automergeType": "pr"
@@ -92,6 +93,7 @@
     {
       "description": "Security/CVE updates: bypass age gate and maintenance windows, jump the queue with prPriority 10, automerge immediately on green CI",
       "matchCategories": ["security"],
+      "commitMessagePrefix": "fix(security):",
       "minimumReleaseAge": "0 days",
       "prPriority": 10,
       "automerge": true,
@@ -123,7 +125,7 @@
       "matchManagers": ["kubernetes"],
       "matchUpdateTypes": ["digest"],
       "commitMessageTopic": "docker/{{replace '.+/' '' depName}}",
-      "commitMessageExtra": "{{currentDigestShort}} → {{newDigestShort}} (digest)"
+      "commitMessageExtra": "{{currentDigestShort}} -> {{newDigestShort}} (digest)"
     },
     {
       "description": "argocd: helm/ prefix, strip org/registry path keeping only chart name, include from/to versions and update type",
@@ -151,7 +153,7 @@
       "matchManagers": ["dockerfile"],
       "matchUpdateTypes": ["digest"],
       "commitMessageTopic": "docker/{{replace '.+/' '' depName}}",
-      "commitMessageExtra": "{{currentDigestShort}} → {{newDigestShort}} (digest)"
+      "commitMessageExtra": "{{currentDigestShort}} -> {{newDigestShort}} (digest)"
     },
     {
       "description": "npm: add npm/ prefix, use resolved versions not constraint strings, include update type",
@@ -161,11 +163,11 @@
       "commitMessageExtra": "from {{currentVersion}} to {{newVersion}} ({{updateType}})"
     },
     {
-      "description": "composer: include from/to versions and update type",
+      "description": "composer: include from/to resolved versions and update type",
       "matchManagers": ["composer"],
       "matchUpdateTypes": ["major", "minor", "patch"],
       "commitMessageTopic": "{{depName}}",
-      "commitMessageExtra": "from {{currentValue}} to {{newValue}} ({{updateType}})"
+      "commitMessageExtra": "from {{currentVersion}} to {{newVersion}} ({{updateType}})"
     },
     {
       "description": "github-actions: action/ prefix, strip org keeping only action name, include from/to versions and update type",
@@ -175,19 +177,19 @@
       "commitMessageExtra": "from {{currentValue}} to {{newValue}} ({{updateType}})"
     },
     {
-      "description": "github-actions pin: lowercase action word and show target SHA (built-in uses capital Pin and overrides topic)",
+      "description": "github-actions pin: lowercase action word, show target SHA, include update type (built-in uses capital Pin and overrides topic)",
       "matchManagers": ["github-actions"],
       "matchUpdateTypes": ["pin"],
       "commitMessageAction": "pin",
       "commitMessageTopic": "action/{{replace '.+/' '' depName}}",
-      "commitMessageExtra": "to {{newDigestShort}}"
+      "commitMessageExtra": "to {{newDigestShort}} (pin)"
     },
     {
       "description": "github-actions digest: show short SHA instead of meaningless branch-name diff",
       "matchManagers": ["github-actions"],
       "matchUpdateTypes": ["digest"],
       "commitMessageTopic": "action/{{replace '.+/' '' depName}}",
-      "commitMessageExtra": "{{currentDigestShort}} → {{newDigestShort}} (digest)"
+      "commitMessageExtra": "{{currentDigestShort}} -> {{newDigestShort}} (digest)"
     }
   ]
 }
