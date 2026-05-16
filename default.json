@@ -47,10 +47,7 @@
       "matchUpdateTypes": ["major"],
       "minimumReleaseAge": "30 days",
       "labels": ["major"],
-      "automerge": false,
-      "reviewers": [
-        "mbologna"
-      ]
+      "automerge": false
     },
     {
       "description": "Patch updates: hold 7 days to let the community catch supply-chain attacks before auto-merging on green CI",
@@ -80,8 +77,7 @@
       "description": "GitHub Actions: never auto-merge — workflow changes run with repo permissions and are a supply-chain risk",
       "matchManagers": ["github-actions"],
       "automerge": false,
-      "groupName": null,
-      "reviewers": ["mbologna"]
+      "groupName": null
     },
     {
       "description": "mbologna/.github reusable workflows: already age-gated by that repo's own Renovate run — skip stability window, bypass schedule, automerge on green CI, and clear reviewer assigned by the major rule",
