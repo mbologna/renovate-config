@@ -31,6 +31,9 @@
   "gomod": {
     "ignorePaths": ["**/vendor/**"]
   },
+  "pre-commit": {
+    "pinDigests": false
+  },
   "lockFileMaintenance": {
     "enabled": true,
     "automerge": true,
