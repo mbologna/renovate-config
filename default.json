@@ -175,11 +175,11 @@
       "commitMessageExtra": "{{currentDigestShort}} -> {{newDigestShort}} (digest)"
     },
     {
-      "description": "terraform: terraform/ prefix, use resolved versions not constraint strings, include update type; bump range lower bound to the new version rather than widening the constraint",
+      "description": "terraform: terraform/ prefix, use resolved versions not constraint strings, include update type; bump range lower bound to the new version rather than widening the constraint; currentVersion is absent for lockfile-only updates so make the 'from' clause conditional",
       "matchManagers": ["terraform"],
-      "matchUpdateTypes": ["major", "minor", "patch", "pin"],
+      "matchUpdateTypes": ["major", "minor", "patch", "pin", "lockFileMaintenance"],
       "commitMessageTopic": "terraform/{{depName}}",
-      "commitMessageExtra": "from {{currentVersion}} to {{newVersion}} ({{updateType}})",
+      "commitMessageExtra": "{{#if currentVersion}}from {{currentVersion}} to {{/if}}{{newVersion}} ({{updateType}})",
       "rangeStrategy": "bump"
     },
     {
