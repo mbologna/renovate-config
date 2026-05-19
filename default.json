@@ -15,9 +15,9 @@
   "automergeStrategy": "squash",
   "separateMultipleMajor": true,
   "transitiveRemediation": true,
-  "prTitle": "{{commitMessagePrefix}} {{commitMessageAction}} {{commitMessageTopic}} {{commitMessageExtra}}{{#if automerge}} [automerge{{#if minimumReleaseAge}} in {{minimumReleaseAge}}{{/if}}]{{/if}}",
+  "prTitle": "{{commitMessagePrefix}} {{commitMessageAction}} {{commitMessageTopic}} {{commitMessageExtra}}{{#if (and (equals manager 'github-actions') (containsString depName 'mbologna'))}} [automerge]{{else if (equals manager 'github-actions')}} [manual review]{{else if isVulnerabilityAlert}} [automerge]{{else if isLockfileUpdate}} [automerge]{{else if isMajor}} [manual review]{{else if isMinor}} [automerge in 14 days]{{else}} [automerge in 7 days]{{/if}}",
   "prBodyNotes": [
-    "{{#if automerge}}⚡ **Automerge enabled** — this PR will be merged automatically once CI passes{{#if minimumReleaseAge}} and the package has been published for at least **{{minimumReleaseAge}}**{{/if}}.{{else}}👤 **Manual review required** — this PR will not be automerged.{{/if}}"
+    "{{#if (and (equals manager 'github-actions') (containsString depName 'mbologna'))}}⚡ **Automerge enabled** — merges automatically once CI is green.{{else if (equals manager 'github-actions')}}👤 **Manual review required** — GitHub Actions changes run with repo permissions and are a supply-chain risk.{{else if isVulnerabilityAlert}}⚡ **Automerge enabled** — CVE fix, merges automatically once CI is green.{{else if isLockfileUpdate}}⚡ **Automerge enabled** — lock file maintenance, merges automatically once CI is green.{{else if isMajor}}👤 **Manual review required** — major update, held 30 days then assigned for manual review.{{else if isMinor}}⚡ **Automerge enabled** — merges automatically once CI is green and the package has been published for at least **14 days**.{{else}}⚡ **Automerge enabled** — merges automatically once CI is green and the package has been published for at least **7 days**.{{/if}}"
   ],
   "dependencyDashboardTitle": "🤖 Renovate Dependency Dashboard",
   "dependencyDashboardLabels": ["renovate"],
