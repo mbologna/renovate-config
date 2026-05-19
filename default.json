@@ -15,6 +15,10 @@
   "automergeStrategy": "squash",
   "separateMultipleMajor": true,
   "transitiveRemediation": true,
+  "prTitle": "{{commitMessagePrefix}} {{commitMessageAction}} {{commitMessageTopic}} {{commitMessageExtra}}{{#if automerge}} [automerge{{#if minimumReleaseAge}} in {{minimumReleaseAge}}{{/if}}]{{/if}}",
+  "prBodyNotes": [
+    "{{#if automerge}}⚡ **Automerge enabled** — this PR will be merged automatically once CI passes{{#if minimumReleaseAge}} and the package has been published for at least **{{minimumReleaseAge}}**{{/if}}.{{else}}👤 **Manual review required** — this PR will not be automerged.{{/if}}"
+  ],
   "dependencyDashboardTitle": "🤖 Renovate Dependency Dashboard",
   "dependencyDashboardLabels": ["renovate"],
   "vulnerabilityAlerts": {
