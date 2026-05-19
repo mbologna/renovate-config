@@ -10,7 +10,7 @@
   ],
   "commitMessageAction": "update",
   "commitMessagePrefix": "chore(deps):",
-  "rebaseWhen": "behind-base-branch",
+  "rebaseWhen": "conflicted",
   "platformAutomerge": true,
   "automergeStrategy": "squash",
   "separateMultipleMajor": true,
@@ -30,6 +30,7 @@
     "commitMessagePrefix": "fix(security):",
     "minimumReleaseAge": "0 days",
     "schedule": ["at any time"],
+    "automergeSchedule": ["at any time"],
     "automerge": true
   },
   "gomod": {
@@ -106,7 +107,8 @@
       "minimumReleaseAge": "0 days",
       "prPriority": 10,
       "automerge": true,
-      "schedule": ["at any time"]
+      "schedule": ["at any time"],
+      "automergeSchedule": ["at any time"]
     },
     {
       "description": "Regex-managed versions: one PR per package; include from/to versions and update type",
